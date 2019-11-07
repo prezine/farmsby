@@ -19,4 +19,8 @@
 		{
 			return $this->version;
 		}
+		public function viewJson()
+		{
+			header("Content-Type: Application/json");
+		}
 	}

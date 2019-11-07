@@ -16,11 +16,11 @@
     ini_set('display_errors', TRUE);
     defined('DEBUG_MODE')       OR define('DEBUG_MODE', 1);
   # Directory Pathing
-    defined('BASEPATH')         OR define('BASEPATH', 'http://127.0.0.1/farmsby-redesign/');
+    defined('BASEPATH')         OR define('BASEPATH', 'http://127.0.0.1/farmsby-/');
     defined('APPPATH')          OR define('APPPATH', dirname( __FILE__ ));
   # Authentification and Device Data
-    defined('VALID_USERNAME')   OR define('VALID_USERNAME', 'admin');
-    defined('VALID_PASSWORD')   OR define('VALID_PASSWORD', 'letmein');
+    defined('VALID_USERNAME')   OR define('VALID_USERNAME', '');
+    defined('VALID_PASSWORD')   OR define('VALID_PASSWORD', '');
     defined('DEVICE_IP')        OR define('DEVICE_IP', $_SERVER['REMOTE_ADDR']);
     defined('USER_AGENT')       OR define('USER_AGENT', getenv("HTTP_USER_AGENT"));
   # Secrets
@@ -28,6 +28,8 @@
   # Date and Time Configurations
     defined('GLOBAL_DATE')      OR define('GLOBAL_DATE', date(DATE_RFC2822));
     defined('DEVICE_DATE')      OR define('DEVICE_DATE', date("Y-m-d"));
-  # Investment Constants
+  
+
+  # => Cutom Constants
     defined('SI_ANNUAL_PERCENT')   OR define('SI_ANNUAL_PERCENT', 50);
     defined('JV_ANNUAL_PERCENT')   OR define('JV_ANNUAL_PERCENT', 75);
