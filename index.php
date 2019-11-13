@@ -1,3 +1,16 @@
+<?php  
+  session_start();
+  include_once 'app/connect.php';
+  include_once 'app/controller/Farmsby.php';
+  include_once 'app/controller/Database.php';
+  include_once 'app/controller/User.php';
+  $farmsby = new Farmsby();
+  $user = new Users($conn);
+  include_once 'app/model/userdata.php';
+  if ($farmsby->getSession('userID') == NULL) {
+    header("Location: login");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +60,7 @@
 
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
           <div>
-            <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+            <h4 class="mb-3 mb-md-0">Hi <?php echo $lastname ?>, welcome to Farmsby</h4>
           </div>
           <div class="d-flex align-items-center flex-wrap text-nowrap">
             <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">

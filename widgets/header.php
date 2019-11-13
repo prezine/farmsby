@@ -32,28 +32,28 @@
             </li>
             <li class="nav-item dropdown nav-profile">
               <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="assets/images/faces/face1.jpg" alt="profile">
+                <img src="<?php echo $userPhoto; ?>" alt="profile">
               </a>
               <div class="dropdown-menu" aria-labelledby="profileDropdown">
                 <div class="dropdown-header d-flex flex-column align-items-center">
                   <div class="figure mb-3">
-                    <img src="assets/images/faces/face1.jpg" alt="">
+                    <img src="<?php echo $userPhoto; ?>" alt="">
                   </div>
                   <div class="info text-center">
-                    <p class="name font-weight-bold mb-0">Amiah Burton</p>
-                    <p class="email text-muted mb-3">amiahburton@gmail.com</p>
+                    <p class="name font-weight-bold mb-0"><?php echo $name ?></p>
+                    <p class="email text-muted mb-3"><?php echo $email ?></p>
                   </div>
                 </div>
                 <div class="dropdown-body">
                   <ul class="profile-nav p-0 pt-3">
                     <li class="nav-item">
-                      <a href="pages/general/profile.html" class="nav-link">
+                      <a href="profile" class="nav-link">
                         <i data-feather="user"></i>
                         <span>My Account</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="javascript:;" class="nav-link">
+                      <a href="app/model/logout" class="nav-link">
                         <i data-feather="log-out"></i>
                         <span>Log Out</span>
                       </a>

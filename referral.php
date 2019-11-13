@@ -1,3 +1,16 @@
+<?php  
+  session_start();
+  include_once 'app/connect.php';
+  include_once 'app/controller/Farmsby.php';
+  include_once 'app/controller/Database.php';
+  include_once 'app/controller/User.php';
+  $farmsby = new Farmsby();
+  $user = new Users($conn);
+  include_once 'app/model/userdata.php';
+  if ($farmsby->getSession('userID') == NULL) {
+    header("Location: login");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,8 +74,8 @@
                     <form class="forms-sample">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Referral code</label>
-                        <input type="text" class="form-control" placeholder="Referral code">
-                        <a href="register.html" class="d-block mt-3 text-muted">click to copy referral</a>
+                        <input type="text" class="form-control" placeholder="Referral code" value="<?php echo $userToken ?>" disabled="">
+                        <a href="#" class="d-block mt-3 text-muted">click to copy referral</a>
                       </div>
                       <!--<div class="form-check form-check-flat form-check-primary">
                         <label class="form-check-label">

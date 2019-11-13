@@ -1,10 +1,23 @@
+<?php  
+  session_start();
+  include_once 'app/connect.php';
+  include_once 'app/controller/Farmsby.php';
+  include_once 'app/controller/Database.php';
+  include_once 'app/controller/User.php';
+  $farmsby = new Farmsby();
+  $user = new Users($conn);
+  include_once 'app/model/userdata.php';
+  if ($farmsby->getSession('userID') == NULL) {
+    header("Location: login");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Farmsby | Our Farms</title>
+  <title><?php echo $name ?></title>
   <!-- core:css -->
   <link rel="stylesheet" href="assets/vendors/core/core.css">
   <!-- endinject -->
@@ -61,7 +74,7 @@
                       <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
                           <img class="profile-pic" src="assets/images/faces/face1.jpg" alt="profile">
-                          <span class="profile-name">Amiah Burton</span>
+                          <span class="profile-name"><?php echo $name ?></span>
                         </div>
                         <div class="d-none d-md-block">
                           <button class="btn btn-primary btn-icon-text btn-edit-profile">
@@ -72,25 +85,13 @@
                     </div>
                     <div class="header-links">
                       <ul class="links d-flex align-items-center mt-3 mt-md-0">
-                        <li class="header-link-item d-flex align-items-center active">
-                          <i class="mr-1 icon-md" data-feather="columns"></i>
-                          <a class="pt-1px d-none d-md-block" href="profile.html#">Timeline</a>
+                        <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                          <i class="mr-1 icon-md" data-feather="git-merge"></i>
+                          <a class="pt-1px d-none d-md-block" href="referral">Referral <span class="text-muted tx-12">3,765</span></a>
                         </li>
                         <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
-                          <i class="mr-1 icon-md" data-feather="user"></i>
-                          <a class="pt-1px d-none d-md-block" href="profile.html#">About</a>
-                        </li>
-                        <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
-                          <i class="mr-1 icon-md" data-feather="users"></i>
-                          <a class="pt-1px d-none d-md-block" href="profile.html#">Friends <span class="text-muted tx-12">3,765</span></a>
-                        </li>
-                        <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
-                          <i class="mr-1 icon-md" data-feather="image"></i>
-                          <a class="pt-1px d-none d-md-block" href="profile.html#">Photos</a>
-                        </li>
-                        <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
-                          <i class="mr-1 icon-md" data-feather="video"></i>
-                          <a class="pt-1px d-none d-md-block" href="profile.html#">Videos</a>
+                          <i class="mr-1 icon-md" data-feather="eye"></i>
+                          <a class="pt-1px d-none d-md-block" href="log">Audit Logs</a>
                         </li>
                       </ul>
                     </div>
@@ -116,22 +117,18 @@
                       </div>
                     </div>
                   </div>
-                  <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
+                  <p>Hi! I'm a proud Farmsbian.</p>
                   <div class="mt-3">
                     <label class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
-                    <p class="text-muted">November 15, 2015</p>
+                    <p class="text-muted"><?php echo $farmsby->time_elapsed_string($dateJoined) ?></p>
                   </div>
-                  <div class="mt-3">
+                  <!--<div class="mt-3">
                     <label class="tx-11 font-weight-bold mb-0 text-uppercase">Lives:</label>
                     <p class="text-muted">New York, USA</p>
-                  </div>
+                  </div>-->
                   <div class="mt-3">
                     <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-                    <p class="text-muted">me@nobleui.com</p>
-                  </div>
-                  <div class="mt-3">
-                    <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
-                    <p class="text-muted">www.nobleui.com</p>
+                    <p class="text-muted"><?php echo $email ?></p>
                   </div>
                   <div class="mt-3 d-flex social-links">
                     <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">

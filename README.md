@@ -33,22 +33,24 @@ You can find the configuration file in `/app/config.php` all defined as a consta
 
 ### Structure
 Farmsby Project structure the `/app` directory holds the functionality of the app, it is the brain directory, within it contains the controller (where every algorithm, logics, and more is applied as a class), the `/library` contains all files from [packagist](https://packagist.org/) php code store, installed using composer. `/logs` stores all errors in .log file, while the `/model` holds every logic of the app.
-	-	app
-		- controller
-		- library
-		- logs
-		- model
-		config.php
-		connect.php
-	- assets
-		- css
-		- fonts
-		- images
-		- js
-		- vendors
-	- widgets
-	.htaccess
-	- ... (html files with <.php> extensions)
+
+```
+Farmsby/
+├── app/
+│	 ├── controller/
+│   ├── library/
+│   ├── model/
+│   ├── config.php
+│   └── connect.php
+├── assets/
+│	 ├── css/
+│   ├── fonts/
+│	 ├── images/
+│   ├── js/
+│	 ├── vendors/
+├── widgets/
+└── .htaccess
+```
 
 ### Using Database
 Hey! working with our Database you need an average knowledge of a working SQL.

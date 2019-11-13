@@ -1,3 +1,16 @@
+<?php  
+  session_start();
+  include_once 'app/connect.php';
+  include_once 'app/controller/Farmsby.php';
+  include_once 'app/controller/Database.php';
+  include_once 'app/controller/User.php';
+  $farmsby = new Farmsby();
+  $user = new Users($conn);
+  include_once 'app/model/userdata.php';
+  if ($farmsby->getSession('userID') == NULL) {
+    header("Location: login");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,6 +116,6 @@
   <script src="https://js.paystack.co/v1/inline.js"></script> 
   <!-- FlutterWave API -->
   <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-  <script src="assets/js/pay.js"></script>
+  <script src="assets/js/app/pay.js"></script>
 </body>
 </html>    

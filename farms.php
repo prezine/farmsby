@@ -1,3 +1,16 @@
+<?php  
+  session_start();
+  include_once 'app/connect.php';
+  include_once 'app/controller/Farmsby.php';
+  include_once 'app/controller/Database.php';
+  include_once 'app/controller/User.php';
+  $farmsby = new Farmsby();
+  $user = new Users($conn);
+  include_once 'app/model/userdata.php';
+  if ($farmsby->getSession('userID') == NULL) {
+    header("Location: login");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
