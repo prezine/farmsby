@@ -66,7 +66,7 @@
                     <div class="d-flex align-items-center">
                       <i data-feather="corner-up-left" id="backToChatList" class="icon-lg mr-2 ml-n2 text-muted d-lg-none"></i>
                       <div>
-                        [Investment Type] 
+                        Make new Investment
                       </div>
                     </div>
                     <div class="d-flex align-items-center mr-n1">
@@ -75,14 +75,46 @@
                   </div>
                 </h6>
                 <form class="forms-sample">
+                  <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" checked="" class="form-check-input" name="type" id="invType" value="Standard Investment">
+                            Standard Investment
+                            <i class="input-frame"></i>
+                          </label>
+                        </div>
+                      </div><!-- Col -->
+                      <div class="col-sm-6">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="type" id="invType" value="Joint Venture">
+                            Joint Ventures
+                            <i class="input-frame"></i>
+                          </label>
+                        </div>
+                      </div><!-- Col -->
+                    </div>
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Amount</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" placeholder="Investment Amount">
+                    <label for="amount">Amount</label>
+                    <input type="text" class="form-control" id="amount" autocomplete="off" placeholder="Investment Amount">
+                  </div>
+                  <div class="form-group">
+                    <div class="btn-group btn-block" role="group" aria-label="Months">
+                      <button type="button" class="btn btn-primary mpicker">3 Months</button>
+                      <button type="button" class="btn btn-primary mpicker">6 Months</button>
+                      <button type="button" class="btn btn-primary mpicker">9 Months</button>
+                      <button type="button" class="btn btn-primary mpicker">12 Months</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Calculated Profit</label>
+                    <input type="text" class="form-control" id="profit" placeholder="Pofit" readonly="">
                   </div>
                   <div class="form-check form-check-flat form-check-primary">
                     <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input">
-                      Email Invoice
+                      <input type="checkbox" checked="" disabled="" class="form-check-input">
+                      On payment you will receive an investment reciept
                     </label>
                   </div>
                   <button type="button" class="btn btn-primary mr-2" onclick="payWithPaystack()">Pay with paystacks</button>
@@ -112,10 +144,12 @@
   <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/datepicker.js"></script>
   <!-- end custom js for this page -->
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/app/invest.js"></script>
   <!-- Paystacks API -->
   <script src="https://js.paystack.co/v1/inline.js"></script> 
+  <script src="assets/js/app/pay.js"></script>
   <!-- FlutterWave API -->
   <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-  <script src="assets/js/app/pay.js"></script>
 </body>
 </html>    

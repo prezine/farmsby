@@ -20,4 +20,6 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+join\?refToken=([^\s&]+) [NC]
 RewriteRule ^ join/%1? [R=301,L]
 RewriteRule ^join/([^/]+)?$ join.php?refToken=$1 [L,QSA]
 
+php_value session.gc_maxlifetime 604800
+
 # ErrorDocument 404 http://127.0.0.1/agricashui/404

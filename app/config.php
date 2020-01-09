@@ -3,7 +3,7 @@
     defined('DATABASE_HOST')    OR Define('DATABASE_HOST', 'localhost');
     defined('DATABASE_USER')    OR define('DATABASE_USER', 'root');
     defined('DATABASE_CODE')    OR define('DATABASE_CODE', 'root');
-    defined('DATABASE_NAME')    OR define('DATABASE_NAME', 'agrocash');
+    defined('DATABASE_NAME')    OR define('DATABASE_NAME', 'farmsby');
   # Permissions
     defined('ENV')              OR define('ENV', 1); 
   # Server Configuration
@@ -16,7 +16,7 @@
     ini_set('display_errors', TRUE);
     defined('DEBUG_MODE')       OR define('DEBUG_MODE', 1);
   # Directory Pathing
-    defined('BASEPATH')         OR define('BASEPATH', 'http://127.0.0.1/farmsby-/');
+    defined('BASEPATH')         OR define('BASEPATH', 'http://127.0.0.1/farmsby/');
     defined('APPPATH')          OR define('APPPATH', dirname( __FILE__ ));
   # Authentification and Device Data
     defined('VALID_USERNAME')   OR define('VALID_USERNAME', '');

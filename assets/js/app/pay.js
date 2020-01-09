@@ -3,7 +3,7 @@ function payWithRave() {
     var x = getpaidSetup({
         PBFPubKey: API_publicKey,
         customer_email: "tom@farmsby.com",
-        amount: 2000,
+        amount: $("#amount").val(),
         customer_phone: "23408179685649",
         currency: "NGN",
         txref: "rave-123456",
@@ -32,7 +32,7 @@ function payWithPaystack(){
   var handler = PaystackPop.setup({
     key: 'pk_live_bb08343f497bceda1118df60cf1f7c7b19361bd4',
     email: 'tom@farmsby.com',
-    amount: 10000,
+    amount: $("#amount").val() + '00',
     currency: "NGN",
     ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
     metadata: {

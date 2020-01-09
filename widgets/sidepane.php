@@ -56,7 +56,7 @@
       </li>
       <li class="nav-item nav-category">Extra</li>
       <li class="nav-item">
-        <a href="#" onclick="openChat()" class="nav-link">
+        <a href="#" onclick="$crisp.push(['do', 'chat:open'])" class="nav-link">
           <i class="link-icon" data-feather="help-circle"></i>
           <span class="link-title">Support</span>
         </a>

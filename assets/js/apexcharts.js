@@ -619,9 +619,5 @@ var options = {
 
   chart.render();
   // Apex Heat chart end
-  
-  
-
-  
 
 });

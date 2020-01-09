@@ -6,7 +6,10 @@
   include_once 'app/controller/User.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
+  $database = new Database($conn);
   include_once 'app/model/userdata.php';
+  $refData = $user->allRef($farmsby->getSession('userID'));
+  $allRef = json_decode($refData, true);
   if ($farmsby->getSession('userID') == NULL) {
     header("Location: login");
   }
@@ -90,7 +93,9 @@
                     </div>
                     <div class="row">
                       <div class="col-12 col-md-12 col-xl-12">
-                        <h3 class="mb-2">&#x20A6; 897,020,000</h3>
+                        <h3 class="mb-2">&#x20A6;
+                          <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE userID='.$userID, 'SUM(amount)') ?>
+                        </h3>
                         <div class="d-flex align-items-baseline">
                           <p class="text-success">
                             <span>+3.3%</span>
@@ -119,7 +124,9 @@
                     </div>
                     <div class="row">
                       <div class="col-6 col-md-12 col-xl-5">
-                        <h3 class="mb-2">35,084</h3>
+                        <h3 class="mb-2">
+                          <?php echo $database->count('SELECT COUNT(userID) FROM users WHERE refID='.$userID, 'COUNT(userID)') ?>
+                        </h3>
                         <div class="d-flex align-items-baseline">
                           <p class="text-danger">
                             <span>-2.8%</span>
@@ -138,7 +145,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
-                      <h6 class="card-title mb-0">Total Divedend</h6>
+                      <h6 class="card-title mb-0">Total Dividend</h6>
                       <div class="dropdown mb-2">
                         <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -174,7 +181,7 @@
         </div> <!-- row -->
 
         <div class="row">
-          <div class="col-12 col-xl-12 grid-margin stretch-card">
+          <!--<div class="col-12 col-xl-12 grid-margin stretch-card">
             <div class="card overflow-hidden">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
@@ -210,108 +217,65 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div> <!-- row -->
-
-        <div class="row">
+          </div>-->
           <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-baseline mb-2">
-                  <h6 class="card-title mb-0">Inbox</h6>
+                  <h6 class="card-title mb-0">Referrals</h6>
                   <div class="dropdown mb-2">
                     <button class="btn p-0" type="button" id="dropdownMenuButton6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton6">
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View all</span></a>
                     </div>
                   </div>
                 </div>
                 <div class="d-flex flex-column">
-                  <a href="#" class="d-flex align-items-center border-bottom pb-3">
-                    <div class="mr-3">
-                      <img src="assets/images/faces/face2.jpg" class="rounded-circle wd-35" alt="user">
-                    </div>
-                    <div class="w-100">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="text-body mb-2">Leonardo Payne</h6>
-                        <p class="text-muted tx-12">12.30 PM</p>
-                      </div>
-                      <p class="text-muted tx-13">Hey! there I'm available...</p>
-                    </div>
-                  </a>
-                  <a href="#" class="d-flex align-items-center border-bottom py-3">
-                    <div class="mr-3">
-                      <img src="assets/images/faces/face3.jpg" class="rounded-circle wd-35" alt="user">
-                    </div>
-                    <div class="w-100">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="text-body mb-2">Carl Henson</h6>
-                        <p class="text-muted tx-12">02.14 AM</p>
-                      </div>
-                      <p class="text-muted tx-13">I've finished it! See you so..</p>
-                    </div>
-                  </a>
-                  <a href="#" class="d-flex align-items-center border-bottom py-3">
-                    <div class="mr-3">
-                      <img src="assets/images/faces/face4.jpg" class="rounded-circle wd-35" alt="user">
-                    </div>
-                    <div class="w-100">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="text-body mb-2">Jensen Combs</h6>
-                        <p class="text-muted tx-12">08.22 PM</p>
-                      </div>
-                      <p class="text-muted tx-13">This template is awesome!</p>
-                    </div>
-                  </a>
-                  <a href="#" class="d-flex align-items-center border-bottom py-3">
-                    <div class="mr-3">
-                      <img src="assets/images/faces/face5.jpg" class="rounded-circle wd-35" alt="user">
-                    </div>
-                    <div class="w-100">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="text-body mb-2">Amiah Burton</h6>
-                        <p class="text-muted tx-12">05.49 AM</p>
-                      </div>
-                      <p class="text-muted tx-13">Nice to meet you</p>
-                    </div>
-                  </a>
-                  <a href="#" class="d-flex align-items-center border-bottom py-3">
-                    <div class="mr-3">
-                      <img src="assets/images/faces/face6.jpg" class="rounded-circle wd-35" alt="user">
-                    </div>
-                    <div class="w-100">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="text-body mb-2">Yaretzi Mayo</h6>
-                        <p class="text-muted tx-12">01.19 AM</p>
-                      </div>
-                      <p class="text-muted tx-13">Hey! there I'm available...</p>
-                    </div>
-                  </a>
+                  <?php  
+                    foreach ($allRef as $ar) {
+                      echo 
+                      '<a href="#" class="d-flex align-items-center border-bottom py-3">
+                        <div class="mr-3">
+                          <img src="https://ui-avatars.com/api/?name='. $ar['name'] .'&background=25D04E&color=fff&rounded=true&bold=true" class="rounded-circle wd-35" alt="user">
+                        </div>
+                        <div class="w-100">
+                          <div class="d-flex justify-content-between">
+                            <h6 class="text-body mb-2">'. $ar['name'] .'</h6>
+                            <p class="text-muted tx-12">12.30 PM</p>
+                          </div>
+                        </div>
+                      </a>';
+                    }
+                  ?>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-7 col-xl-8 stretch-card">
+          <div class="col-xl-8 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Transaction Chart</h6>
+                <div id="apexLine"></div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- row -->
+
+        <div class="row">
+          <!--<div class="col-lg-7 col-xl-8 stretch-card">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-baseline mb-2">
-                  <h6 class="card-title mb-0">Projects</h6>
+                  <h6 class="card-title mb-0">Overview Investments</h6>
                   <div class="dropdown mb-2">
                     <button class="btn p-0" type="button" id="dropdownMenuButton7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
-                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View All</span></a>
+                      <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">New Investment</span></a>
                     </div>
                   </div>
                 </div>
@@ -390,7 +354,7 @@
                 </div>
               </div> 
             </div>
-          </div>
+          </div>-->
         </div> <!-- row -->
 
       </div>
@@ -412,6 +376,7 @@
   <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
   <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
+
   <!-- end plugin js for this page -->
   <!-- inject:js -->
   <script src="assets/vendors/feather-icons/feather.min.js"></script>
@@ -420,6 +385,7 @@
   <!-- custom js for this page -->
   <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/datepicker.js"></script>
+  <script src="assets/js/apexcharts.js"></script>
   <!-- end custom js for this page -->
 </body>
 </html>    

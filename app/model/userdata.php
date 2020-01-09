@@ -1,6 +1,7 @@
 <?php
 	$json = $user->userData();
 	$data = json_decode($json, true);
+	$userID = $data['userID'];
 	$name = $data['name'];
 	@list($firstname, $lastname)  = explode(" ", $name);
 	$email = $data['email'];

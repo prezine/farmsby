@@ -36,10 +36,14 @@
 			$insert = "INSERT INTO $table (". $this->getRows($data) .") VALUES (". $this->getValues($data) .")";
 			return ($this->query($insert)) ? 200 : $this->error() ;
 		}
-		public function select($query = '', $json)
+		public function select($query = '', $json = false, $fetchAll = false)
 		{
 			if ($req = $this->query($query)) {
-				return ($json == true) ? json_encode($this->fetch($req)) : $this->fetch($req);
+				if ($fetchAll == true) {
+					return ($json == true) ? json_encode($this->fetchAll($req)) : $this->fetchAll($req);
+				} else {
+					return ($json == true) ? json_encode($this->fetch($req)) : $this->fetch($req);
+				}
 			} else {
 				return $this->error();
 			}
@@ -70,9 +74,25 @@
 		{
 			return mysqli_fetch_assoc($query);
 		}
+		public function fetchAll($query = '')
+		{
+			while ($row = mysqli_fetch_all($query, MYSQLI_ASSOC)) {
+				return $row;
+			}
+		}
 		public function error()
 		{
 			$conn = $this->conn;
 			return mysqli_error($conn);
+		}
+		public function count($query = '', $row = '', $json = false)
+		{
+			$res = $this->select($query, false);
+			return ($res[$row] == NULL || $res[$row] == "") ? 0 : $res[$row] ;
+		}
+		public function sum($value='')
+		{
+			$res = $this->select($query, false);
+			return ($res[$row] == NULL || $res[$row] == "") ? 0 : $res[$row] ;
 		}
 	}

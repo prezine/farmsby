@@ -17,7 +17,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Farmsby | Our Farms</title>
+  <title>Farmsby | Referral</title>
   <!-- core:css -->
   <link rel="stylesheet" href="assets/vendors/core/core.css">
   <!-- endinject -->
@@ -74,8 +74,8 @@
                     <form class="forms-sample">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Referral code</label>
-                        <input type="text" class="form-control" placeholder="Referral code" value="<?php echo $userToken ?>" disabled="">
-                        <a href="#" class="d-block mt-3 text-muted">click to copy referral</a>
+                        <input type="text" class="form-control" placeholder="Referral code" id="refCode" value="<?php echo $userToken ?>" disabled="">
+                        <a href="#" class="d-block mt-3 text-muted" onclick="copyreferralcode()">click to copy referral</a>
                       </div>
                       <!--<div class="form-check form-check-flat form-check-primary">
                         <label class="form-check-label">
