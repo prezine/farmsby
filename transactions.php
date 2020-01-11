@@ -3,10 +3,16 @@
   include_once 'app/connect.php';
   include_once 'app/controller/Farmsby.php';
   include_once 'app/controller/Database.php';
+  include_once 'app/controller/Transaction.php';
+  include_once 'app/controller/Algorithm.php';
   include_once 'app/controller/User.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
+  $algorithm = new Algorithm($conn);
+  $trans = new Transaction($conn);
   include_once 'app/model/userdata.php';
+  $transactionData = $trans->getTable();
+  $transactDecode = json_decode($transactionData, true);
   if ($farmsby->getSession('userID') == NULL) {
     header("Location: login");
   }
@@ -17,7 +23,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Farmsby | Invest</title>
+  <title>Farmsby | Transactions</title>
   <!-- core:css -->
   <link rel="stylesheet" href="assets/vendors/core/core.css">
   <!-- endinject -->
@@ -61,7 +67,6 @@
             <div class="card">
               <div class="card-body">
                 <h6 class="card-title">All Transactions</h6>
-                <p class="card-description">Read the <a href="#" target="_blank"> Official Transaction Documentation </a>for a full list of instructions and other options.</p>
                 <div class="table-responsive">
                   <table id="dataTableExample" class="table">
                     <thead>
@@ -76,15 +81,41 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Tom Precious</td>
-                        <td>Joint Ventures</td>
-                        <td>400,000</td>
-                        <td>In Progress</td>
-                        <td>30,000</td>
-                        <td>3 days ago</td>
-                        <td>...</td>
-                      </tr>
+                      <?php  
+                        if ($transactDecode !== NULL) {
+                          foreach ($transactDecode as $td) {
+                            echo 
+                            '<tr>
+                              <td>'. $name .'</td>
+                              <td>'. $td['farm_mode'] .'</td>
+                              <td>'. number_format($td['amount']) .' NGN</td>
+                              <td>'. $trans->transactionStatus($td['status']) .'</td>
+                              <td>
+                                '. $algorithm->calcProfit($td['amount'], $td['dateInvested'], $trans->typeToPercent($td['farm_mode'])) .'
+                                NGN
+                              </td>
+                              <td>'. $farmsby->time_elapsed_string($td['dateInvested']) .'</td>
+                              <td>
+                                  <button type="button" class="btn btn-primary btn-icon-text">
+                                    Request withdraw
+                                    <i class="btn-icon-append" data-feather="credit-card"></i>
+                                  </button>
+                              </td>
+                            </tr>';
+                          } 
+                        } else {
+                          echo
+                          '</tbody></table>
+                          <div class="align-items-center text-center">
+                          <img src="assets/images/no_transaction.png" style="width: 400px">
+                          <h4> :( No Transaction Record </h4>
+                          <a href="./invest" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+                            <i class="btn-icon-prepend" data-feather="download-cloud"></i>
+                            Start a new Investment
+                          </a>
+                          </div>';
+                        }
+                      ?>
                     </tbody>
                   </table>
                 </div>

@@ -85,15 +85,15 @@
                       </div>-->
                       <!--<i data-feather="copy"></i>-->
                       <div class="mt-3">
-                        <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                        <button type="button" onclick="twitterShare('<?php echo BASEPATH . $userToken ?>')" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
                           <i class="btn-icon-prepend" data-feather="twitter"></i>
                           share
                         </button>
-                        <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                        <button type="button" onclick="facebookShare('<?php echo BASEPATH . $userToken ?>')" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
                           <i class="btn-icon-prepend" data-feather="facebook"></i>
                           share
                         </button>
-                        <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+                        <button type="button" onclick="linkedinShare('<?php echo BASEPATH . $userToken ?>')" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
                           <i class="btn-icon-prepend" data-feather="linkedin"></i>
                           share
                         </button>
@@ -132,5 +132,6 @@
   <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/datepicker.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script src="assets/js/app/share.js"></script>
 </body>
 </html>    

@@ -17,6 +17,11 @@
 		public function allRef($userID)
 		{
 			$conn = $this->conn;
-			return $this->select("SELECT * FROM users WHERE refID = ". $userID, true, true);	
+			return $this->select("SELECT * FROM users WHERE refID = ". $userID, true, true);
+		}
+		public function retreiveRefID($token = '')
+		{
+			$conn = $this->conn;
+			return $this->select("SELECT userID FROM users WHERE userToken ='$token'");
 		}
 	}

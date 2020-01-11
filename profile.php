@@ -3,10 +3,19 @@
   include_once 'app/connect.php';
   include_once 'app/controller/Farmsby.php';
   include_once 'app/controller/Database.php';
+  include_once 'app/controller/Transaction.php';
+  include_once 'app/controller/Algorithm.php';
   include_once 'app/controller/User.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
+  $algorithm = new Algorithm($conn);
+  $trans = new Transaction($conn);
+  $database = new Database($conn);
   include_once 'app/model/userdata.php';
+  $transactionData = $trans->getTable();
+  $transactDecode = json_decode($transactionData, true);
+  $refData = $user->allRef($farmsby->getSession('userID'));
+  $allRef = json_decode($refData, true);
   if ($farmsby->getSession('userID') == NULL) {
     header("Location: login");
   }
@@ -53,7 +62,7 @@
     ?>
     <!-- partial -->
   
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="background-color: #FFFFFF">
       <!-- partial:partials/_navbar.html -->
       <?php include_once 'widgets/header.php'; ?>
       <!-- partial -->
@@ -73,11 +82,11 @@
                       </figure>
                       <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
-                          <img class="profile-pic" src="assets/images/faces/face1.jpg" alt="profile">
+                          <img class="profile-pic" src="<?php echo $userPhoto ?>" alt="profile">
                           <span class="profile-name"><?php echo $name ?></span>
                         </div>
                         <div class="d-none d-md-block">
-                          <button class="btn btn-primary btn-icon-text btn-edit-profile">
+                          <button class="btn btn-primary btn-icon-text btn-edit-profile" data-toggle="modal" data-target="#editProfile" data-whatever="@mdo">
                             <i data-feather="edit" class="btn-icon-prepend"></i> Edit profile
                           </button>
                         </div>
@@ -87,7 +96,11 @@
                       <ul class="links d-flex align-items-center mt-3 mt-md-0">
                         <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                           <i class="mr-1 icon-md" data-feather="git-merge"></i>
-                          <a class="pt-1px d-none d-md-block" href="referral">Referral <span class="text-muted tx-12">3,765</span></a>
+                          <a class="pt-1px d-none d-md-block" href="referral">
+                            Referral <span class="text-muted tx-12">
+                              <?php echo $database->count('SELECT COUNT(userID) FROM users WHERE refID='.$userID, 'COUNT(userID)') ?>
+                            </span>
+                          </a>
                         </li>
                         <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                           <i class="mr-1 icon-md" data-feather="eye"></i>
@@ -97,6 +110,30 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              
+              <div class="row">
+                <?php  
+                  if ($allRef !== NULL) {
+                    foreach ($allRef as $ar) {
+                      echo 
+                      '<div class="col-md-3">
+                        <div class="card">
+                          <img src="https://ui-avatars.com/api/?name='. $ar['name'] .'&background='. dechex(rand(0x000000, 0xFFFFFF)) .'&color=fff&bold=true" class="card-img-top" alt="'. $ar['name'] .'">
+                          <div class="card-body">
+                            <h5 class="card-title">'. $ar['name'] .'</h5>
+                          </div>
+                        </div>
+                      </div>';
+                    }
+                  } else {
+                    echo
+                    '<div class="col-md-12 align-items-center text-center">
+                    <h5> You have nothing yet! </h5>
+                    <img src="assets/images/empty_space.jpg" style="width: 400px">
+                    </div>';
+                  }
+                ?>
               </div>
             </div>
             <!-- left wrapper end -->
@@ -149,6 +186,55 @@
         </div>
       </div>
 
+      <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" value="" placeholder="Enter Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" value="" placeholder="Enter Email">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" id="phone" value="">
+                  </div>
+                  <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" id="gender">
+                      <option selected="" disabled="">Select your gender</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Upload profile photo</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                      <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                      <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                      </span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-success">update profile</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- partial:partials/_footer.html -->
       <?php include_once 'widgets/footer.php'; ?>
       <!-- partial -->
@@ -173,5 +259,6 @@
   <!-- custom js for this page -->
   <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/datepicker.js"></script>
+  <script src="assets/js/app/profile.js"></script>
 </body>
 </html>    

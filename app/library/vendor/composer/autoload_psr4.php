@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Abraham\\TwitterOAuth\\' => array($vendorDir . '/abraham/twitteroauth/src'),
+    'Twilio\\' => array($vendorDir . '/twilio/sdk/Twilio'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

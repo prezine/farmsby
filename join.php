@@ -1,5 +1,13 @@
 <?php  
     session_start();
+    include_once 'app/connect.php';
+    include_once 'app/controller/Farmsby.php';
+    include_once 'app/controller/Database.php';
+    include_once 'app/controller/User.php';
+    $user = new Users($conn);
+    $rawToken = (isset($_GET['refToken'])) ? $_GET['refToken'] : 0 ;
+    @list($token, $ext) = explode('.', $rawToken);
+    $refID = $user->retreiveRefID($token)['userID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,20 +17,20 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Join Millions on Farmsby</title>
 	<!-- core:css -->
-	<link rel="stylesheet" href="assets/vendors/core/core.css">
+	<link rel="stylesheet" href="<?php echo BASEPATH . 'assets/vendors/core/core.css'?>">
 	<!-- endinject -->
     <!-- plugin css for this page -->
-    <link rel="stylesheet" href="assets/vendors/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?php echo BASEPATH . 'assets/vendors/sweetalert2/sweetalert2.min.css'?>">
     <!-- end plugin css for this page -->
     <!-- plugin css for this page -->
 	<!-- end plugin css for this page -->
 	<!-- inject:css -->
-	<link rel="stylesheet" href="assets/fonts/feather-font/css/iconfont.css">
+	<link rel="stylesheet" href="<?php echo BASEPATH . 'assets/fonts/feather-font/css/iconfont.css'?>">
 	<!-- endinject -->
   <!-- Layout styles -->  
-	<link rel="stylesheet" href="assets/css/demo_1/style.css">
+	<link rel="stylesheet" href="<?php echo BASEPATH . 'assets/css/demo_1/style.css'?>">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="assets/images/favicon.png" />
+  <link rel="shortcut icon" href="<?php echo BASEPATH . 'assets/images/favicon.png'?>" />
 </head>
 <body>
 	<div class="main-wrapper">
@@ -40,15 +48,15 @@
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="index" class="noble-ui-logo d-block mb-2"><img src="assets/images/logo.png" style="width: 150px"></a>
+                                        <a href="index" class="noble-ui-logo d-block mb-2"><img src="<?php echo BASEPATH . 'assets/images/logo.png'?>" style="width: 150px"></a>
                                         <h5 class="text-muted font-weight-normal mb-4">Create a free account.</h5>
-                                        <?php  
-                                            if ($_SESSION['msg']) {
+                                        <?php
+                                            if (isset($_SESSION['msg'])) {
                                                 echo $_SESSION['msg'];
                                                 unset($_SESSION['msg']);
                                             }
                                         ?>
-                                        <form class="forms-sample" action="app/model/join" method="post">
+                                        <form class="forms-sample" action="<?php echo BASEPATH . 'app/model/join'?>" method="post">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Fullname</label>
                                             <input type="text" class="form-control" id="name" name="name" autocomplete="name" placeholder="Fullname">
@@ -67,6 +75,7 @@
                                             Remember me
                                             </label>
                                         </div>
+                                        <input type="hidden" name="refID" value="<?php echo $refID ?>">
                                         <div class="mt-3">
                                             <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Sign up</button>
                                             <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
@@ -88,18 +97,18 @@
 	</div>
 
 	<!-- core:js -->
-	<script src="assets/vendors/core/core.js"></script>
+	<script src="<?php echo BASEPATH . 'assets/vendors/core/core.js'?>"></script>
 	<!-- endinject --> 
     <!-- plugin js for this page -->
-    <script src="assets/vendors/sweetalert2/sweetalert2.min.js"></script>
-    <script src="assets/vendors/promise-polyfill/polyfill.min.js"></script> <!-- Optional:  polyfill for ES6 Promises for IE11 and Android browser -->
+    <script src="<?php echo BASEPATH . 'assets/vendors/sweetalert2/sweetalert2.min.js'?>"></script>
+    <script src="<?php echo BASEPATH . 'assets/vendors/promise-polyfill/polyfill.min.js'?>"></script> <!-- Optional:  polyfill for ES6 Promises for IE11 and Android browser -->
 	<!-- end plugin js for this page -->
 	<!-- inject:js -->
-	<script src="assets/vendors/feather-icons/feather.min.js"></script>
-	<script src="assets/js/template.js"></script>
+	<script src="<?php echo BASEPATH . 'assets/vendors/feather-icons/feather.min.js'?>"></script>
+	<script src="<?php echo BASEPATH . 'assets/js/template.js'?>"></script>
 	<!-- endinject -->
-    <script src="assets/js/sweet-alert.js"></script>
-    <script src="assets/js/app/auth.js"></script>
+    <script src="<?php echo BASEPATH . 'assets/js/sweet-alert.js'?>"></script>
+    <script src="<?php echo BASEPATH . 'assets/js/app/auth.js'?>"></script>
     <script>
         $("#join").on('submit', function (event) {
             event.preventDefault();

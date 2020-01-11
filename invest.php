@@ -59,6 +59,9 @@
         <div class="row">
           <div class="col-md-3">&nbsp;</div>
           <div class="col-md-6">
+
+            <div class="errno"></div>
+
             <div class="card">
               <div class="card-body">
                 <h6 class="card-title">

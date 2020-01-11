@@ -4,9 +4,23 @@
   include_once 'app/controller/Farmsby.php';
   include_once 'app/controller/Database.php';
   include_once 'app/controller/User.php';
+  include_once 'app/controller/Transaction.php';
+  include_once 'app/controller/Algorithm.php';
+  include_once 'app/controller/User.php';
+  include_once 'app/controller/Log.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
+  $database = new Database($conn);
+  $algorithm = new Algorithm($conn);
+  $trans = new Transaction($conn);
+  $logger = new LogActivities($conn);
   include_once 'app/model/userdata.php';
+  $transactionData = $trans->getTable();
+  $transactDecode = json_decode($transactionData, true);
+  $refData = $user->allRef($farmsby->getSession('userID'));
+  $allRef = json_decode($refData, true);
+  $getLogs = $logger->grabLogs();
+  $decodeLogs = json_decode($getLogs, true);
   if ($farmsby->getSession('userID') == NULL) {
     header("Location: login");
   }
@@ -62,25 +76,20 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                <h6 class="card-title">Timeline</h6>
+                <h6 class="card-title">Audit Log</h6>
                 <div id="content">
                   <ul class="timeline">
-                    <li class="event" data-date="12:30 - 1:00pm">
-                      <h3>Registration</h3>
-                      <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-                    </li>
-                    <li class="event" data-date="2:30 - 4:00pm">
-                      <h3>Opening Ceremony</h3>
-                      <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-                    </li>
-                    <li class="event" data-date="5:00 - 8:00pm">
-                      <h3>Main Event</h3>
-                      <p>This is where it all goes down. You will compete head to head with your friends and rivals. Get ready!</p>    
-                    </li>
-                    <li class="event" data-date="8:30 - 9:30pm">
-                      <h3>Closing Ceremony</h3>
-                      <p>See how is the victor and who are the losers. The big stage is where the winners bask in their own glory.</p>    
-                    </li>
+                    <?php  
+                      if ($decodeLogs !== NULL) {
+                        foreach ($decodeLogs as $dcl) {
+                         echo 
+                         '<li class="event" data-date="'. $farmsby->time_elapsed_string($dcl['dateNoted']) .'">
+                          <h3>'. $dcl['action'] .'</h3>
+                          <p>'. $dcl['activity'] .'</p>
+                        </li>'; 
+                        }
+                      }
+                    ?>
                   </ul>
                 </div>
               </div>
