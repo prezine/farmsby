@@ -70,7 +70,7 @@
 
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
           <div>
-            <h4 class="mb-3 mb-md-0">Hi <?php echo $lastname ?>, welcome to Farmsby</h4>
+            <h4 class="mb-3 mb-md-0">Hi <?php echo $lastname ?>, Welcome to Farmsby</h4>
           </div>
           <div class="d-flex align-items-center flex-wrap text-nowrap">
             <a href="./invest" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
@@ -149,7 +149,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
-                      <h6 class="card-title mb-0">Total Dividend</h6>
+                      <h6 class="card-title mb-0">Total Expected Profit</h6>
                       <div class="dropdown mb-2">
                         <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -173,9 +173,9 @@
                                 $totalDiv[] =
                                 $algorithm->calcProfit($td['amount'], $td['dateInvested'], $trans->typeToPercent($td['farm_mode']));
                               }
-                              echo array_sum($totalDiv);
+                              echo '&#x20a6; ' . array_sum($totalDiv);
                             } else {
-                              echo 0;
+                              echo '&#x20a6; ' . 0;
                             }
                           ?>
                         </h3>

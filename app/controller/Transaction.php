@@ -20,6 +20,11 @@
 			$conn = $this->conn;
 			return $this->insert('invest', $data);
 		}
+		public function generateReceipt($ref = '')
+		{
+			$conn = $this->conn;
+			return $this->select("SELECT * FROM invest WHERE trasaction_ref='$ref'", true);
+		}
 		public function transactionStatus($int)
 		{
 			if ($int == 0) {

@@ -70,11 +70,11 @@
                 <div class="col-md-8 pl-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="login.html#" class="noble-ui-logo d-block mb-2">Your referral <span>code</span></a>
-                    <h5 class="text-muted font-weight-normal mb-4">Refer new investor with your referral code and earn 10% on the revenue Farmsby makes from that transaction.</h5>
+                    <h5 class="text-muted font-weight-normal mb-4">Tell your friends about Farmsby and get 10% of their initial investment paid to you as referral bonus. Contact us for more info.</h5>
                     <form class="forms-sample">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Referral code</label>
-                        <input type="text" class="form-control" placeholder="Referral code" id="refCode" value="<?php echo $userToken ?>" disabled="">
+                        <input type="text" class="form-control" placeholder="Referral code" id="refCode" value="<?php echo BASEPATH . 'join/'. $userToken ?>" disabled="">
                         <a href="#" class="d-block mt-3 text-muted" onclick="copyreferralcode()">click to copy referral</a>
                       </div>
                       <!--<div class="form-check form-check-flat form-check-primary">

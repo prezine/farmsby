@@ -71,7 +71,7 @@
                   <table id="dataTableExample" class="table">
                     <thead>
                       <tr>
-                        <th>Name</th>
+                        <th>Transaction Reference</th>
                         <th>Investment type</th>
                         <th>Amount</th>
                         <th>Status</th>
@@ -86,7 +86,7 @@
                           foreach ($transactDecode as $td) {
                             echo 
                             '<tr>
-                              <td>'. $name .'</td>
+                              <td><a href="./receipt/'. $td['trasaction_ref'] .'" target="_blank">'. $td['trasaction_ref'] .'</a></td>
                               <td>'. $td['farm_mode'] .'</td>
                               <td>'. number_format($td['amount']) .' NGN</td>
                               <td>'. $trans->transactionStatus($td['status']) .'</td>
@@ -97,7 +97,7 @@
                               <td>'. $farmsby->time_elapsed_string($td['dateInvested']) .'</td>
                               <td>
                                   <button type="button" class="btn btn-primary btn-icon-text">
-                                    Request withdraw
+                                    Request withdrawal
                                     <i class="btn-icon-append" data-feather="credit-card"></i>
                                   </button>
                               </td>
