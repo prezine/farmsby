@@ -5,9 +5,11 @@
     include_once 'app/controller/Database.php';
     include_once 'app/controller/Transaction.php';
     include_once 'app/controller/User.php';
+    include_once 'app/controller/Algorithm.php';
     $user = new Users($conn);
     include_once 'app/model/userdata.php';
     $trans = new Transaction($conn);
+    $algo = new Algorithm();
     $rawRef = (isset($_GET['trasaction_ref'])) ? $_GET['trasaction_ref'] : 0 ;
     @list($ref, $ext) = explode('.', $rawRef);
     $receiptData = $trans->generateReceipt($ref); 
@@ -50,14 +52,8 @@
                     <a href="#" class="noble-ui-logo d-block mt-3">
                       <img src="<?php echo BASEPATH . 'assets/images/logo.png'?>" style="width: 150px">
                     </a>
-                    <p class="mt-1 mb-1">Investment Type: <br><b><?php echo $receiptDecode['farm_mode'] ?></b></p>
-                    <h5 class="mt-5 mb-2 text-muted">Receipt to :</h5>
-                    <p><?php echo $name ?></p>
-                  </div>
-                  <div class="col-lg-5 pr-0">
-                    <h4 class="font-weight-medium text-uppercase text-right mt-4 mb-2">investment receipt</h4>
-                    <h6 class="text-right pb-2"># INV-<?php echo sprintf('%06d', $receiptDecode['investID']); ?></h6>
-                    <h6 class="mb-0 text-right font-weight-normal mb-2"><span class="text-muted">Invoice Date :</span> 25rd Jan 2019</h6>
+                    <h4 class="font-weight-medium text-uppercase text-left mt-4 mb-2">investment receipt</h4>
+                    <h6 class="text-left pb-2"># INV-<?php echo sprintf('%06d', $receiptDecode['investID']); ?></h6>
                   </div>
                 </div>
                 <div class="container-fluid mt-5 d-flex justify-content-center w-100">
@@ -65,20 +61,53 @@
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                              <th>#</th>
-                              <th>Description</th>
-                              <th class="text-right">Amount</th>
-                              <th class="text-right">Balance Due</th>
-                              <th class="text-right">Total</th>
+                              <th>Investment type</th>
+                              <th class="text-right">Tenure</th>
+                              <th class="text-right">Investment Date</th>
+                              <th class="text-right">Maturity Date</th>
                             </tr>
                         </thead>
                         <tbody>
                           <tr class="text-right">
-                            <td class="text-left">1</td>
-                            <td class="text-left"><?php echo $receiptDecode['farm_mode'] ?></td>
+                            <td class="text-left"> <?php echo $receiptDecode['farm_mode'] ?> </td>
+                            <td> <?php echo $receiptDecode['monthCycle'] * 30 ?> days</td>
+                            <td> <?php echo $receiptDecode['dateInvested'] ?> </td>
+                            <td> <?php echo number_format($receiptDecode['amount']) ?> </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+
+                <div class="container-fluid mt-5 d-flex justify-content-center w-100">
+                  <div class="table-responsive w-100">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                              <th>Description</th>
+                              <th>Amount (&#x20A6;)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="text-left">
+                            <td> <?php echo $receiptDecode['farm_mode'] ?> </td>
                             <td><?php echo number_format($receiptDecode['amount']) ?></td>
-                            <td> — </td>
-                            <td><?php echo number_format($receiptDecode['amount']) ?></td>
+                          </tr>
+                          <tr class="text-left">
+                            <td> Gross Expected Profit </td>
+                            <td><?php echo $algo->receipt($receiptDecode['farm_mode'], $receiptDecode['amount'], $receiptDecode['monthCycle'], 'gross_profit') ?></td>
+                          </tr>
+                          <tr class="text-left">
+                            <td> (5% Withholding Tax on Profit) </td>
+                            <td><?php echo $algo->receipt($receiptDecode['farm_mode'], $receiptDecode['amount'], $receiptDecode['monthCycle'], 'tax_on_profit') ?></td>
+                          </tr>
+                          <tr class="text-left">
+                            <td> Net Expected Profit </td>
+                            <td><?php echo $algo->receipt($receiptDecode['farm_mode'], $receiptDecode['amount'], $receiptDecode['monthCycle'], 'net_profit') ?></td>
+                          </tr>
+                          <tr class="text-left">
+                            <td> <strong>Total Amount</strong> </td>
+                            <td><?php echo $algo->receipt($receiptDecode['farm_mode'], $receiptDecode['amount'], $receiptDecode['monthCycle'], 'total_amount') ?></td>
                           </tr>
                         </tbody>
                       </table>

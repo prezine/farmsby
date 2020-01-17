@@ -23,7 +23,7 @@
 			'farm_mode' => $_POST['farmMode'],
 			'amount' => $_POST['amount'],
 			'monthCycle' => $_POST['cycle'],
-			'trasaction_ref' => $_POST['ref'],
+			'transaction_ref' => $_POST['ref'],
 			'status' => 0,
 			'bonusUserID' => (!$refID) ? 0 : $refID,
 			'bonusAmount' => $algorithm->percentage(5, $_POST['amount']),

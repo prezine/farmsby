@@ -28,8 +28,6 @@
   # Date and Time Configurations
     defined('GLOBAL_DATE')      OR define('GLOBAL_DATE', date(DATE_RFC2822));
     defined('DEVICE_DATE')      OR define('DEVICE_DATE', date("Y-m-d"));
-  
-
   # => Cutom Constants
     defined('SI_ANNUAL_PERCENT')   OR define('SI_ANNUAL_PERCENT', 50);
     defined('JV_ANNUAL_PERCENT')   OR define('JV_ANNUAL_PERCENT', 75);

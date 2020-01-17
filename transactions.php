@@ -48,7 +48,7 @@
   </script>
   <!-- Google Analytics end -->
 </head>
-<body>
+<body oncontextmenu="return false;">
   <div class="main-wrapper">
 
     <!-- partial:partials/_sidebar.html -->
@@ -66,6 +66,12 @@
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
+                <?php  
+                  if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']);
+                  }
+                ?>
                 <h6 class="card-title">All Transactions</h6>
                 <div class="table-responsive">
                   <table id="dataTableExample" class="table">
@@ -86,7 +92,7 @@
                           foreach ($transactDecode as $td) {
                             echo 
                             '<tr>
-                              <td><a href="./receipt/'. $td['trasaction_ref'] .'" target="_blank">'. $td['trasaction_ref'] .'</a></td>
+                              <td><a href="./receipt/'. $td['transaction_ref'] .'" target="_blank">'. $td['transaction_ref'] .'</a></td>
                               <td>'. $td['farm_mode'] .'</td>
                               <td>'. number_format($td['amount']) .' NGN</td>
                               <td>'. $trans->transactionStatus($td['status']) .'</td>
@@ -96,7 +102,7 @@
                               </td>
                               <td>'. $farmsby->time_elapsed_string($td['dateInvested']) .'</td>
                               <td>
-                                  <button type="button" class="btn btn-primary btn-icon-text">
+                                  <button type="button" '. $trans->buttonController($td['status']) .' class="btn btn-primary btn-icon-text toggleWithdraw" data-toggle="modal" data-id="'. $td['investID'] .'" data-profit="'. $algorithm->calcProfit($td['amount'], $td['dateInvested'], $trans->typeToPercent($td['farm_mode'])) .'" data-target="#withdraw">
                                     Request withdrawal
                                     <i class="btn-icon-append" data-feather="credit-card"></i>
                                   </button>
@@ -120,6 +126,20 @@
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="withdraw" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <input type="hidden" class="investID" value="">
+              <input type="hidden" class="yourProfit" value="">
+              <button type="button" class="btn btn-primary btn-block withdraw" data-state="1" data-baseurl="<?php echo BASEPATH ?>">Withdraw profit only</button>
+              <button type="button" class="btn btn-success btn-block withdraw" data-state="2" data-baseurl="<?php echo BASEPATH ?>">Withdraw profit + capital</button>
             </div>
           </div>
         </div>
@@ -155,6 +175,31 @@
   <script src="https://js.paystack.co/v1/inline.js"></script> 
   <!-- FlutterWave API -->
   <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
-  <script src="assets/js/pay.js"></script>
+  <script src="assets/js/app/pay.js"></script>
+  <script src="assets/js/app/withdraw.js"></script>
+  <script type="text/javascript">
+    document.onkeydown = function(e) {
+      if(event.keyCode == 123) {
+        alert('You cannot inspect Element');
+         return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        alert('Lol, stop looking, you cannot inspect Element');
+        return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+        alert('You cannot inspect Element');
+        return false;
+      }
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        alert('You cannot inspect Element');
+        return false;
+      }
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        alert('You cannot inspect Element');
+        return false;
+      }
+    }
+  </script>
 </body>
 </html>    
