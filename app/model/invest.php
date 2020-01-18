@@ -10,6 +10,7 @@
 	include_once '../controller/User.php';
 	include_once '../controller/Log.php';
 	include_once '../controller/Mailer.php';
+	include_once 'mailer.php';
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$trans = new Transaction($conn);
 		$error = new ErrorLogs();
@@ -48,14 +49,14 @@
 		);
 		$logger->log($data);
 		if ($trans->recordNewInvestment($invest) == 200) {
-			$checkFirstTime = $farmsbyMailer->select("SELECT COUNT(*) FROM invest WHERE userID='1'", true);
+			$checkFirstTime = $farmsbyMailer->select("SELECT COUNT(*) FROM invest WHERE userID=".$farmsby->getSession('userID'), true);
 		    $decodeOutput = json_decode($checkFirstTime, true)['COUNT(*)']; // output: 0 for first-time investment
-			$recipientEmail = $_POST['email'];
-			$subject = "Verify your farmsby account";
+			$recipientEmail = $email;
+			$subject = "Investment Notification";
 			$htmlData = 
 			($decodeOutput == 0) ? 
-			$farmsbyMailer->firstInvestment($name, $dateofInvesmentMaturity = '') : 
-			$farmsbyMailer->returningInvestment($name, $dateofInvesmentMaturity = '');
+			$farmsbyMailer->firstInvestment($name, $farmsby->addDate(DEVICE_DATE, $_POST['cycle'] * 30)) : 
+			$farmsbyMailer->returningInvestment($name, $farmsby->addDate(DEVICE_DATE, $_POST['cycle'] * 30));
 			sendEmail($recipientEmail, $recipientName = "Farmsby", $subject, $htmlData);
 			echo 200;
 		} else {

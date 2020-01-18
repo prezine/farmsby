@@ -8,8 +8,10 @@
 	include_once '../controller/Hash.php';
 	include_once '../controller/Log.php';
 	include_once '../controller/Mailer.php';
-	include_once 'userdata.php';
 	include_once 'mailer.php';
+	include_once '../controller/User.php';
+	$user = new Users($conn);
+	include_once 'userdata.php';
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		$auth = new Auth($conn);
 		$error = new ErrorLogs();

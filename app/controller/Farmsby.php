@@ -71,4 +71,35 @@
 			if (!$full) $string = array_slice($string, 0, 1);
 			return $string ? implode(', ', $string) . ' ago' : 'Just now';
 	    }
+	    public function secondsToTime($seconds) 
+	    {
+	        $dtF = new \DateTime('@0');
+	        $dtT = new \DateTime("@$seconds");
+	        $daterray = array(
+	          'days' => $dtF->diff($dtT)->format('%a'),
+	          'hours' => $dtF->diff($dtT)->format('%h'),
+	          'minutes' => $dtF->diff($dtT)->format('%i'),
+	          'seconds' => $dtF->diff($dtT)->format('%s'),
+	          'full' => $dtF->diff($dtT)->format('%a days %h hours %i minutes %s seconds') 
+	        );
+	        return $daterray;
+	    }
+	    public function diffDateToSeconds($ts1, $ts2)
+	    {
+	        $ts1 = strtotime($ts1);
+	        $ts2 = strtotime($ts2);
+	        $seconds_diff = $ts2 - $ts1;
+	        return $seconds_diff;
+	    }
+	    public function readableDate($input)
+	    {
+	      $convert = date("jS F, Y", strtotime($input));
+	      return $convert;
+	    }
+	    public function addDate($setDate, $addedDays)
+	    {
+	      $date = new DateTime($setDate);
+	      $date->add(new DateInterval('P'. $addedDays .'D'));
+	      return $date->format('Y-m-d');
+	    }
 	}
