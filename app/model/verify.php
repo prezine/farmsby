@@ -8,45 +8,34 @@
 	include_once '../controller/Hash.php';
 	include_once '../controller/Log.php';
 	include_once '../controller/Mailer.php';
+	include_once 'userdata.php';
 	include_once 'mailer.php';
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		$auth = new Auth($conn);
 		$error = new ErrorLogs();
 		$hash = new Hash();
 		$farmsby = new Farmsby();
 		$logger = new LogActivities($conn);
 		$farmsbyMailer = new FarmsbyMailer($conn);
-		$code = $hash->mt_rand_str(6);
-		$res = $auth->join(array(
-			'name' => $_POST['name'],
-			'email' => $_POST['email'],
-			'password' => hash('haval160,5', $_POST['password']),
-			'is_approved' => 0,
-			'is_verified' => 0,
-			'is_completReg' => 0,
-			'refID' => $_POST['refID'],
-			'userToken' => $hash->mt_rand_str(6),
-			'is_admin' => 0,
-			'how_did_you_hear' => $_POST['how_did_you_hear'],
-			'dateJoined' => GLOBAL_DATE
-		), $code);
-		if ($res == 200) {
-			$recipientEmail = $_POST['email'];
-			$subject = "Verify your farmsby account";
-			$htmlData = $farmsbyMailer->verifyMail($code);
+		$code = $_GET['verificationCode'];
+		if ($auth->verifyAccount($code) == 200) {
+			$recipientEmail = $email;
+			$subject = "Welcome to farmsby";
+			$htmlData = $farmsbyMailer->welcomeMail($name);
 			sendEmail($recipientEmail, $recipientName = "Farmsby", $subject, $htmlData);
 			$data = array(
 				'userID' => $farmsby->getSession('userID'),
-				'activity' => 'Hi there, welcome to Farmsby',
+				'activity' => 'Hi there, welcome to farmsby',
 				'action' => 'Registration', 
-				'device_ip' => DEVICE_IP, 
+				'device_ip' => DEVICE_IP,
 				'user_agent' => USER_AGENT, 
 				'dateNoted' =>  GLOBAL_DATE
 			);
 			$logger->log($data);
+			$_SESSION['msg'] = $error->err('success', 'Great! your account has been verified');
 			header("Location: ../../index");
 		} else {
 			$_SESSION['msg'] = (ENV == 0) ? $error->err('danger', $res) : $error->err('danger', 'Oops! something went wrong');
-			header("Location: ". $_SERVER['HTTP_REFERER']);
+			header("Location: ../../login");
 		}
 	}

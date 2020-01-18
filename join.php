@@ -42,9 +42,7 @@
 						<div class="card">
 							<div class="row">
                                 <div class="col-md-4 pr-md-0">
-                                    <div class="auth-left-wrapper">
-
-                                    </div>
+                                    <div class="auth-left-wrapper" style="background-image: url('assets/images/green1.jpg')"></div>
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
@@ -69,11 +67,34 @@
                                             <label for="exampleInputPassword1">Password</label>
                                             <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" placeholder="Password">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputSelect1"> How did you hear about us?</label>
+                                            <select name="how_did_you_hear" class="form-control">
+                                                    <option>How did you hear about us?</option>
+                                                    <option>Community Center/Library</option>
+                                                    <option>Email from Farmsby</option>
+                                                    <option>Radio Adverts/ Session</option>
+                                                    <option>Employer</option>
+                                                    <option>Event</option>
+                                                    <option>Facebook/ Twitter/ Instagram</option>
+                                                    <option>Family</option>
+                                                    <option>Marketer</option>
+                                                    <option>Friend</option>
+                                                    <option>Google search</option>
+                                                    <option>Brochure</option>
+                                                    <option>Leaflet/ Flyer</option>
+                                                    <option>Local newspaper advert</option>
+                                                    <option>Newspaper/ magazine article</option>
+                                                    <option>A Billboard</option>
+                                                    <option>Poster</option>
+                                                    <option>Prospectus</option>
+                                                    <option>School teacher/ Careers advisor</option>
+                                                    <option>Bus advert</option>
+                                                    <option>YouTube advert</option>
+                                            </select>
+                                        </div>
                                         <div class="form-check form-check-flat form-check-primary">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" id="remember" name="remember" class="form-check-input">
-                                            Remember me
-                                            </label>
+                                            On clicking signup, you agree to our <a href="terms">terms of services</a>
                                         </div>
                                         <input type="hidden" name="refID" value="<?php echo $refID ?>">
                                         <div class="mt-3">

@@ -32,9 +32,7 @@
 						<div class="card">
 							<div class="row">
                                 <div class="col-md-4 pr-md-0">
-                                    <div class="auth-left-wrapper">
-
-                                    </div>
+                                    <div class="auth-left-wrapper" style="background-image: url('assets/images/green3.jpg')"></div>
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
@@ -96,7 +94,7 @@
 	<!-- endinject -->
     <!-- custom js for this page -->
     <script src="assets/js/sweet-alert.js"></script>
-    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app/auth.js"></script>
     <!-- end custom js for this page -->
 </body>
 </html>

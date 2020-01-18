@@ -7,13 +7,15 @@
   include_once 'app/controller/Transaction.php';
   include_once 'app/controller/Algorithm.php';
   include_once 'app/controller/User.php';
+  include_once 'app/controller/Error.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
   $database = new Database($conn);
   $algorithm = new Algorithm($conn);
   $trans = new Transaction($conn);
+  $error = new ErrorLogs();
   include_once 'app/model/userdata.php';
-  $transactionData = $trans->getTable();
+  $transactionData = $trans->getActiveTable();
   $transactDecode = json_decode($transactionData, true);
   $refData = $user->allRef($farmsby->getSession('userID'));
   $allRef = json_decode($refData, true);
@@ -81,6 +83,17 @@
         </div>
 
         <div class="row">
+          <div class="col-12 col-md-12">
+            <?php  
+              if ($is_verified == 0) {
+                echo $error->err('danger', '<strong>Uhh!</strong> check your email, to confirm account, or <a style="font-weight: 600" href="./app/model/resend_verification">resend verification</a>');
+              }
+              if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+              }
+            ?>
+          </div>
           <div class="col-12 col-xl-12 stretch-card">
             <div class="row flex-grow">
               <div class="col-md-4 grid-margin stretch-card">
@@ -101,7 +114,7 @@
                     <div class="row">
                       <div class="col-12 col-md-12 col-xl-12">
                         <h3 class="mb-2">&#x20A6;
-                          <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE userID='.$userID, 'SUM(amount)') ?>
+                          <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE status="0" AND userID='.$userID, 'SUM(amount)') ?>
                         </h3>
                         <div class="d-flex align-items-baseline">
                           <p class="text-success">

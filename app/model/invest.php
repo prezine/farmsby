@@ -9,6 +9,7 @@
 	include_once '../controller/Hash.php';
 	include_once '../controller/User.php';
 	include_once '../controller/Log.php';
+	include_once '../controller/Mailer.php';
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$trans = new Transaction($conn);
 		$error = new ErrorLogs();
@@ -17,6 +18,7 @@
 		$hash = new Hash();
 		$user = new Users($conn);
 		$logger = new LogActivities($conn);
+		$farmsbyMailer = new FarmsbyMailer($conn);
 		include_once '../model/userdata.php';
 		$invest = array(
 			'userID' => $farmsby->getSession('userID'),
@@ -45,5 +47,18 @@
 			'dateNoted' =>  GLOBAL_DATE
 		);
 		$logger->log($data);
-		echo $trans->recordNewInvestment($invest);
+		if ($trans->recordNewInvestment($invest) == 200) {
+			$checkFirstTime = $farmsbyMailer->select("SELECT COUNT(*) FROM invest WHERE userID='1'", true);
+		    $decodeOutput = json_decode($checkFirstTime, true)['COUNT(*)']; // output: 0 for first-time investment
+			$recipientEmail = $_POST['email'];
+			$subject = "Verify your farmsby account";
+			$htmlData = 
+			($decodeOutput == 0) ? 
+			$farmsbyMailer->firstInvestment($name, $dateofInvesmentMaturity = '') : 
+			$farmsbyMailer->returningInvestment($name, $dateofInvesmentMaturity = '');
+			sendEmail($recipientEmail, $recipientName = "Farmsby", $subject, $htmlData);
+			echo 200;
+		} else {
+			echo $trans->recordNewInvestment($invest);
+		}
 	}

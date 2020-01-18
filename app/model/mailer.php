@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
-require_once '../library/vendor/autoload.php';
+require_once __DIR__.'/../library/vendor/autoload.php';
 
 function sendEmail($recipientEmail, $recipientName, $subject, $html)
 {
@@ -13,7 +13,7 @@ function sendEmail($recipientEmail, $recipientName, $subject, $html)
     $mail = new PHPMailer(true);
     try {
         //Server settings
-        $mail->SMTPDebug = 0;                                       // Enable verbose debug output
+        $mail->SMTPDebug = 2;                                       // Enable verbose debug output
         $mail->isSMTP();                                            // Set mailer to use SMTP
         $mail->Host       = 'premium72.web-hosting.com';            // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication

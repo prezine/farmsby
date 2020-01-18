@@ -15,6 +15,12 @@
 			//$this->viewJson();
 			return $this->select('SELECT * FROM invest WHERE userID='. $this->getSession('userID'), true, true);
 		}
+		public function getActiveTable()
+		{
+			$conn = $this->conn;
+			//$this->viewJson();
+			return $this->select('SELECT * FROM invest WHERE status="0" AND userID='. $this->getSession('userID'), true, true);
+		}
 		public function recordNewInvestment($data)
 		{
 			$conn = $this->conn;
