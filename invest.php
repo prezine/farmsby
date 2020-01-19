@@ -102,6 +102,7 @@
                     <label for="amount">Amount</label>
                     <input type="text" class="form-control" id="amount" autocomplete="off" placeholder="Investment Amount">
                   </div>
+                  <input type="hidden" id="customers_email" value="<?php echo $email ?>">
                   <div class="form-group">
                     <div class="btn-group btn-block" role="group" aria-label="Months">
                       <button type="button" class="btn btn-primary mpicker">3 Months</button>

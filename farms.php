@@ -65,40 +65,19 @@
                 <h6 class="card-title">Our Farmsby</h6>
                 <div class="owl-carousel owl-theme owl-auto-play">
                   <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img1.jpg" alt="item-image">
+                    <img class="lazy" data-src="./assets/images/farm/cucumber close up.jpg" alt="item-image">
                   </div>
                   <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img2.jpg" alt="item-image">
+                    <img class="lazy" data-src="./assets/images/farm/plowing.jpg" alt="item-image">
                   </div>
                   <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img3.jpg" alt="item-image">
+                    <img class="lazy" data-src="./assets/images/farm/roofed.jpg" alt="item-image">
                   </div>
                   <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img4.jpg" alt="item-image">
+                    <img class="lazy" data-src="./assets/images/farm/open field.jpg" alt="item-image">
                   </div>
                   <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img5.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img6.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img7.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img8.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img9.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img10.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img11.jpg" alt="item-image">
-                  </div>
-                  <div class="item">
-                    <img class="lazy" data-src="assets/images/carousel/img12.jpg" alt="item-image">
+                    <img class="lazy" data-src="./assets/images/farm/harvest.jpg" alt="item-image">
                   </div>
                 </div>
               </div>

@@ -38,9 +38,9 @@
 			}
 			$data = array(
 				'gross_profit' => $calc,
-				'tax_on_profit' => $this->percentage(5, $amt),
-				'net_profit' => $calc - $this->percentage(5, $amt),
-				'total_amount' => $amt + $calc
+				'tax_on_profit' => $this->percentage(5, $calc),
+				'net_profit' => $calc - $this->percentage(5, $calc),
+				'total_amount' => $amt + ($calc - $this->percentage(5, $calc))
 			);
 	    	return number_format($data[$row]);
 	    }

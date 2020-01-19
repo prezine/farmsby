@@ -1,14 +1,15 @@
 function payWithRave() {
   let amt = $("#amount").val();
+  let customers_email = $("#customers_email").val(); 
   let fm = $('input[name="type"]:checked').val();
   let monthcycle = $("div.btn-group button").text();
   monthcycle = monthcycle.split(' ')[0];
-  let API_publicKey = "FLWPUBK_TEST-65299f2cdf8b85a67eaa1fde8fa6f793-X";
+  let API_publicKey = "FLWPUBK-972d48161a316ca44f7c41dec8acb671-X";
     var x = getpaidSetup({
         PBFPubKey: API_publicKey,
-        customer_email: "tomprezine@gmail.com",
+        customer_email: customers_email,
         amount: amt,
-        customer_phone: "23408179685649",
+        customer_phone: "2348179685649",
         currency: "NGN",
         txref: "rave-123456",
         meta: [{
@@ -49,12 +50,13 @@ function payWithRave() {
 
 function payWithPaystack(){
   let amt = $("#amount").val();
+  let customers_email = $("#customers_email").val(); 
   let fm = $('input[name="type"]:checked').val();
   let monthcycle = $("div.btn-group button").text();
   monthcycle = monthcycle.split(' ')[0];
   var handler = PaystackPop.setup({
-    key: 'pk_test_58b1d0bd712f043fd0941bdb21bd03936458dbe9',
-    email: 'tomprezine@gmail.com',
+    key: 'pk_live_bb08343f497bceda1118df60cf1f7c7b19361bd4',
+    email: customers_email,
     amount: amt + '00',
     currency: "NGN",
     ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
@@ -63,7 +65,7 @@ function payWithPaystack(){
           {
               display_name: "Mobile Number",
               variable_name: "mobile_number",
-              value: "+2348012345678"
+              value: "+2348179685649"
           }
        ]
     },

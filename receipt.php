@@ -71,8 +71,8 @@
                           <tr class="text-right">
                             <td class="text-left"> <?php echo $receiptDecode['farm_mode'] ?> </td>
                             <td> <?php echo $receiptDecode['monthCycle'] * 30 ?> days</td>
-                            <td> <?php echo $receiptDecode['dateInvested'] ?> </td>
-                            <td> <?php echo number_format($receiptDecode['amount']) ?> </td>
+                            <td> <?php echo $trans->addDate($receiptDecode['dateInvested'], '0') ?> </td>
+                            <td> <?php echo $trans->addDate($receiptDecode['dateInvested'], $receiptDecode['monthCycle'] * 30) ?> </td>
                           </tr>
                         </tbody>
                       </table>

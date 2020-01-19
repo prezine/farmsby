@@ -259,23 +259,21 @@
                 <div id="slideController" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img src="https://www.nobleui.com/html/template/assets/images/sample1.jpg" class="d-block w-100" alt="...">
+                      <img src="./assets/images/farm/cucumber close up.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                      <img src="https://www.nobleui.com/html/template/assets/images/sample2.jpg" class="d-block w-100" alt="...">
+                      <img src="./assets/images/farm/plowing.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                      <img src="https://www.nobleui.com/html/template/assets/images/sample3.jpg" class="d-block w-100" alt="...">
+                      <img src="./assets/images/farm/roofed.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="./assets/images/farm/open field.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="./assets/images/farm/harvest.jpg" class="d-block w-100" alt="...">
                     </div>
                   </div>
-                  <!--<a class="carousel-control-prev" href="./#slideController" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="./#slideController" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>-->
                 </div>
               </div>
             </div>
