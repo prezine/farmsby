@@ -6,14 +6,18 @@
   include_once 'app/controller/Transaction.php';
   include_once 'app/controller/Algorithm.php';
   include_once 'app/controller/User.php';
+  include_once 'app/controller/Data.php';
   $farmsby = new Farmsby();
   $user = new Users($conn);
   $algorithm = new Algorithm($conn);
   $trans = new Transaction($conn);
   $database = new Database($conn);
+  $dataCollection = new DataCollection($conn);
   include_once 'app/model/userdata.php';
   $transactionData = $trans->getTable();
   $transactDecode = json_decode($transactionData, true);
+  $bankData = $user->grabBankData();
+  $bankDecode = json_decode($bankData, true);
   $refData = $user->allRef($farmsby->getSession('userID'));
   $allRef = json_decode($refData, true);
   if ($farmsby->getSession('userID') == NULL) {
@@ -68,7 +72,12 @@
       <!-- partial -->
       <div class="page-content">
         <div class="profile-page tx-13">
-          
+          <?php  
+            if (isset($_SESSION['msg'])) {
+              echo $_SESSION['msg'];
+              unset($_SESSION['msg']);
+            }
+          ?>
           <div class="row profile-body">
             <!-- left wrapper start -->
             <div class="col-md-8 col-xl-8 middle-wrapper">
@@ -113,7 +122,7 @@
               </div>
               
               <div class="row">
-                <?php  
+                <?php
                   if ($allRef !== NULL) {
                     foreach ($allRef as $ar) {
                       echo 
@@ -142,7 +151,7 @@
               <div class="card rounded">
                 <div class="card-body">
                   <div class="d-flex align-items-center justify-content-between mb-2">
-                    <h6 class="card-title mb-0">About</h6>
+                    <h6 class="card-title mb-0">About Me</h6>
                     <div class="dropdown">
                       <button class="btn p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -154,7 +163,6 @@
                       </div>
                     </div>
                   </div>
-                  <p>Hi! I'm a proud Farmsbian.</p>
                   <div class="mt-3">
                     <label class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
                     <p class="text-muted"><?php echo $farmsby->time_elapsed_string($dateJoined) ?></p>
@@ -167,21 +175,91 @@
                     <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
                     <p class="text-muted"><?php echo $email ?></p>
                   </div>
-                  <div class="mt-3 d-flex social-links">
-                    <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">
-                      <i data-feather="github" data-toggle="tooltip" title="github.com/nobleui"></i>
-                    </a>
-                    <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon twitter">
-                      <i data-feather="twitter" data-toggle="tooltip" title="twitter.com/nobleui"></i>
-                    </a>
-                    <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon instagram">
-                      <i data-feather="instagram" data-toggle="tooltip" title="instagram.com/nobleui"></i>
-                    </a>
+                  <?php if (json_encode($bankDecode) == "null"): ?>
+                  <div class="mt-3 d-none d-md-block">
+                    <button class="btn btn-primary btn-icon-text btn-edit-profile" data-toggle="modal" data-target="#addBank" data-whatever="@mdo">
+                      <i data-feather="edit" class="btn-icon-prepend"></i> Update Bank
+                    </button>
+                  </div>
+                  <?php endif ?>
+                </div>
+                <?php if (json_encode($bankDecode) !== "null"): ?>
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h6 class="card-title mb-0">Bank Details</h6>
+                    <div class="dropdown">
+                      <button class="btn p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item d-flex align-items-center" href="profile.html#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="profile.html#"><i data-feather="git-branch" class="icon-sm mr-2"></i> <span class="">Update</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="profile.html#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View all</span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <label class="tx-11 font-weight-bold mb-0 text-uppercase">Account name:</label>
+                    <p class="text-muted"><?php echo $bankDecode['accountName'] ?></p>
+                  </div>
+                  <div class="mt-3">
+                    <label class="tx-11 font-weight-bold mb-0 text-uppercase">Account number:</label>
+                    <p class="text-muted"><?php echo $bankDecode['accountNumber'] ?></p>
+                  </div>
+                  <div class="mt-3">
+                    <label class="tx-11 font-weight-bold mb-0 text-uppercase">Bank name:</label>
+                    <p class="text-muted"><?php echo $bankDecode['bankName'] ?></p>
+                  </div>
+                  <div class="mt-3 d-none d-md-block">
+                    <button class="btn btn-primary btn-icon-text btn-edit-profile" data-toggle="modal" data-target="#addBank" data-whatever="@mdo">
+                      <i data-feather="edit" class="btn-icon-prepend"></i> Update Bank
+                    </button>
                   </div>
                 </div>
+                <?php endif ?>
               </div>
             </div>
             <!-- right wrapper end -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addBank" tabindex="-1" role="dialog" aria-labelledby="addBankLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addBankLabel">Add Bank Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="app/model/addbank" method="post">
+                  <div class="form-group">
+                    <label for="email">Account Name</label>
+                    <input type="text" class="form-control" name="accountName" value="<?php echo ($bankDecode['accountName']) ? $bankDecode['accountName'] : NULL ?>" placeholder="Enter Account Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Account Number</label>
+                    <input type="text" class="form-control" name="accountNumber" value="<?php echo ($bankDecode['accountNumber']) ? $bankDecode['accountNumber'] : NULL ?>" placeholder="Enter Account Number">
+                  </div>
+                  <div class="form-group">
+                    <label for="gender">Bank Name</label>
+                    <select class="form-control" id="bankName" name="bankName">
+                      <option><?php echo ($bankDecode['bankName']) ? $bankDecode['bankName'] : 'Select your bank' ?></option>
+                      <?php  
+                        $dataBanks = json_decode($dataCollection->banks(), true);
+                        foreach ($dataBanks as $banks) {
+                          echo 
+                          '<option>'. $banks .'</option>';
+                        }
+                      ?>
+                    </select>
+                  </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success">Update bank details</button>
+                </form>
+            </div>
           </div>
         </div>
       </div>

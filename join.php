@@ -8,6 +8,7 @@
     $rawToken = (isset($_GET['refToken'])) ? $_GET['refToken'] : 0 ;
     @list($token, $ext) = explode('.', $rawToken);
     $refID = $user->retreiveRefID($token)['userID'];
+    $name = $user->retreiveRefID($token)['name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Join Millions on Farmsby</title>
+	<title><?php echo ($name) ? 'Join '.explode(" ", $name)[0].' on Farmsby' : 'Join Millions on Farmsby'; ?></title>
 	<!-- core:css -->
 	<link rel="stylesheet" href="<?php echo BASEPATH . 'assets/vendors/core/core.css'?>">
 	<!-- endinject -->
@@ -42,7 +43,7 @@
 						<div class="card">
 							<div class="row">
                                 <div class="col-md-4 pr-md-0">
-                                    <div class="auth-left-wrapper" style="background-image: url('assets/images/green1.jpg')"></div>
+                                    <div class="auth-left-wrapper" style="background-image: url('../assets/images/green1.jpg')"></div>
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
@@ -100,11 +101,11 @@
                                         <div class="mt-3">
                                             <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Sign up</button>
                                             <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
-                                            <i class="btn-icon-prepend" data-feather="twitter"></i>
-                                            Sign up with twitter
+                                            <i class="btn-icon-prepend" data-feather="facebook"></i>
+                                            Sign up with facebook
                                             </button>
                                         </div>
-                                        <a href="login" class="d-block mt-3 text-muted">Already a user? Sign in</a>
+                                        <a href="<?php echo BASEPATH . 'login'?>" class="d-block mt-3 text-muted">Already a user? Sign in</a>
                                         </form>
                                     </div>
                                 </div>
@@ -130,6 +131,7 @@
 	<!-- endinject -->
     <script src="<?php echo BASEPATH . 'assets/js/sweet-alert.js'?>"></script>
     <script src="<?php echo BASEPATH . 'assets/js/app/auth.js'?>"></script>
+    <script src="<?php echo BASEPATH . 'assets/js/app/fb.js' ?>"></script>
     <script>
         $("#join").on('submit', function (event) {
             event.preventDefault();
@@ -150,5 +152,11 @@
             auth.join(JSON.stringify(jsonData));
         });
     </script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1764963443768629&autoLogAppEvents=1"></script>
+    <fb:login-button 
+      scope="public_profile,email"
+      onlogin="checkLoginState();">
+    </fb:login-button>
 </body>
 </html>

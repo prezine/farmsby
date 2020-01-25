@@ -10,8 +10,7 @@
 		$error = new ErrorLogs();
 		$data = array(
 			'email' => $_POST['email'],
-			'password' => hash('haval160,5', $_POST['password']),
-			'remember' => $_POST['rememberme'] 
+			'password' => hash('haval160,5', $_POST['password'])
 		);
 		if ($auth->login($data) == 200) {
 			header("Location: ../../index");

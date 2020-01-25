@@ -8,7 +8,7 @@ function payWithRave() {
   let investmentOption = $("input[type='radio']:checked").val();
   if (investmentOption == 'Standard Investment')
     if (amt < 5000 || amt > 500000) {
-      alert('You cannot place a standard investment for '+amt+' NGN');
+      alert('Try an amount between 50,000 NGN to 500,000 NGN');
     } else {
       var x = getpaidSetup({
           PBFPubKey: API_publicKey,
@@ -54,7 +54,7 @@ function payWithRave() {
     }
   else if (investmentOption == 'Joint Venture')
     if (amt < 500000) {
-      alert('You cannot place a joint venture for '+amt+' NGN');
+      alert('Try an amount above 500,000 NGN');
     } else {
       var x = getpaidSetup({
           PBFPubKey: API_publicKey,
@@ -148,13 +148,13 @@ function payWithPaystack(){
   let investmentOption = $("input[type='radio']:checked").val();
   if (investmentOption == 'Standard Investment')
     if (amt < 5000 || amt > 500000) {
-      alert('You cannot place a standard investment for '+amt+' NGN');
+      alert('Try an amount between 50,000 NGN to 500,000 NGN');
     } else {
       handler.openIframe();
     }
   else if (investmentOption == 'Joint Venture')
     if (amt < 500000) {
-      alert('You cannot place a joint venture for '+amt+' NGN');
+      alert('Try an amount above 500,000 NGN');
     } else {
       handler.openIframe();
     }

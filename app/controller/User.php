@@ -22,6 +22,21 @@
 		public function retreiveRefID($token = '')
 		{
 			$conn = $this->conn;
-			return $this->select("SELECT userID FROM users WHERE userToken ='$token'");
+			return $this->select("SELECT userID, name FROM users WHERE userToken ='$token'");
+		}
+		public function grabBankData()
+		{
+			$conn = $this->conn;
+			return $this->select("SELECT * FROM bank WHERE userID = ". $this->getSession('userID'), true);
+		}
+		public function addBankData($data = '')
+		{
+			$conn = $this->conn;
+			$checkIfExist = $this->select("SELECT * FROM bank WHERE userID = ". $this->getSession('userID'), true);
+			if ($checkIfExist == "null") {
+				return $this->insert('bank', $data);
+			} else {
+				return $this->update("UPDATE bank SET accountName='".$data['accountName']."', accountNumber='".$data['accountNumber']."', bankName='".$data['bankName']."' WHERE userID=". $this->getSession('userID'));
+			}
 		}
 	}

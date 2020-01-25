@@ -177,29 +177,6 @@
   <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
   <script src="assets/js/app/pay.js"></script>
   <script src="assets/js/app/withdraw.js"></script>
-  <script type="text/javascript">
-    document.onkeydown = function(e) {
-      if(event.keyCode == 123) {
-        alert('You cannot inspect Element');
-         return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-        alert('Lol, stop looking, you cannot inspect Element');
-        return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-        alert('You cannot inspect Element');
-        return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-        alert('You cannot inspect Element');
-        return false;
-      }
-      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-        alert('You cannot inspect Element');
-        return false;
-      }
-    }
-  </script>
+  <script src="assets/js/app/security.js"></script>
 </body>
 </html>    

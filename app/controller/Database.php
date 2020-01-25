@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class Database extends Farmsby
+	class Database extends Farmsby 
 	{
 		public $conn;
 		public function __construct($conn)
@@ -76,9 +76,6 @@
 		}
 		public function fetchAll($query = '')
 		{
-			//while ($row = mysqli_fetch_all($query, MYSQLI_ASSOC)) {
-			//	return $row;
-			//}
 			while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 		       $rows[] = $row;
 		    }
