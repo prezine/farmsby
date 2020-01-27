@@ -17,7 +17,7 @@
 		$logger = new LogActivities($conn);
 		$withdrawalType = $_GET['withdrawalType'];
 		$investID = $_GET['investID'];
-		$withdrawalAmt = $_GET['dateRequestWithdrawals'];
+		$withdrawalAmt = $_GET['profit'];
 		if ($withdrawalType == 1) {
 			if ($trasact->withdrawProfitOnly($investID) == 200) {
 				$_SESSION['msg'] = 

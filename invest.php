@@ -72,9 +72,7 @@
                         Make new Investment
                       </div>
                     </div>
-                    <div class="d-flex align-items-center mr-n1">
-                    <button type="button" class="btn btn-primary mr-2">Edit Plan</button>
-                  </div>
+                    <div class="d-flex align-items-center mr-n1"></div>
                   </div>
                 </h6>
                 <form class="forms-sample">
@@ -122,9 +120,23 @@
                     </label>
                   </div>
                   <button type="button" class="btn btn-primary mr-2" onclick="payWithPaystack()">Pay with paystacks</button>
-                  <button type="button" class="btn btn-light mr-2" onclick="payWithRave()">Pay with flutterwave</button>
+                  <button type="button" class="btn btn-light mr-2" onclick="payWithBank()" data-toggle="modal" data-target="#withBank" data-id="1">Pay with Bank</button>
                 </form>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Update Modal Start -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="withBank">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>

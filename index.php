@@ -116,12 +116,6 @@
                         <h3 class="mb-2">&#x20A6;
                           <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE status="0" AND userID='.$userID, 'SUM(amount)') ?>
                         </h3>
-                        <div class="d-flex align-items-baseline">
-                          <p class="text-success">
-                            <span>+3.3%</span>
-                            <i data-feather="arrow-up" class="icon-sm mb-1"></i>
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -147,12 +141,6 @@
                         <h3 class="mb-2">
                           <?php echo $database->count('SELECT COUNT(userID) FROM users WHERE refID='.$userID, 'COUNT(userID)') ?>
                         </h3>
-                        <div class="d-flex align-items-baseline">
-                          <p class="text-danger">
-                            <span>-2.8%</span>
-                            <i data-feather="arrow-down" class="icon-sm mb-1"></i>
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -192,12 +180,6 @@
                             }
                           ?>
                         </h3>
-                        <div class="d-flex align-items-baseline">
-                          <p class="text-success">
-                            <span>+2.8%</span>
-                            <i data-feather="arrow-up" class="icon-sm mb-1"></i>
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -309,6 +291,7 @@
   <script src="assets/js/dashboard.js"></script>
   <script src="assets/js/datepicker.js"></script>
   <script src="assets/js/apexcharts.js"></script>
+  <script src="assets/js/custom.js"></script>
   <!-- end custom js for this page -->
 </body>
 </html>    

@@ -20,6 +20,9 @@ function copyreferralcode() {
   alert("Ref Link Copied: " + copyText.value);
 }
 
+// document.body.contentEditable = 'true'; 
+// document.designMode='on'; void 0
+
 !function(window){
   var $q = function(q, res){
         if (document.querySelectorAll) {

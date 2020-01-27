@@ -66,8 +66,8 @@
 			$conn = $this->conn;
 			$grabTransactionData = $this->select("SELECT * FROM invest WHERE investID='$investID'", true);
 			$tDecode = json_decode($grabTransactionData, true);
-			$withdrawalAmt = $tDecode['amount'] + $withdrawalAmt;
-			return $this->update("UPDATE invest SET request_withdrawal='1', status='1', withdrawalAmt='$withdrawalAmt', dateRequestWithdrawals='GLOBAL_DATE' WHERE investID='$investID'");
+			$withdrawalAmt = str_replace(',', '', $tDecode['amount']) + str_replace(',', '', $withdrawalAmt);
+			return $this->update("UPDATE invest SET request_withdrawal='1', status='1', withdrawalAmt='$withdrawalAmt', dateRequestWithdrawals='".GLOBAL_DATE."' WHERE investID='$investID'");
 		}
 		public function transactionStatus($int)
 		{
