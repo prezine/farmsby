@@ -1,13 +1,13 @@
 $("input[id='invType']").on('click', function() {
 	let investmentOption = $("input[type='radio']:checked").val();
 	let monthSelector = [
-		'<button type="button" class="btn btn-primary mpicker">3 Months</button>\
-	    <button type="button" class="btn btn-primary mpicker">6 Months</button>\
-        <button type="button" class="btn btn-primary mpicker">9 Months</button>\
-        <button type="button" class="btn btn-primary mpicker">12 Months</button>',
+		'<button type="button" class="btn btn-success mpicker">3 Months</button>\
+	    <button type="button" class="btn btn-success mpicker">6 Months</button>\
+        <button type="button" class="btn btn-success mpicker">9 Months</button>\
+        <button type="button" class="btn btn-success mpicker">12 Months</button>',
 
-	    '<button type="button" class="btn btn-primary mpicker">6 Months</button>\
-        <button type="button" class="btn btn-primary mpicker">12 Months</button>'
+	    '<button type="button" class="btn btn-success mpicker">6 Months</button>\
+        <button type="button" class="btn btn-success mpicker">12 Months</button>'
 	];
     if (investmentOption == 'Standard Investment')
         $("div[role='group']").html(monthSelector[0]);

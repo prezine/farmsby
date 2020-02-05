@@ -60,7 +60,7 @@
 	<!-- endinject -->
     <!-- custom js for this page -->
     <script src="assets/js/sweet-alert.js"></script>
-    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app/auth.js"></script>
     <!-- end custom js for this page -->
 </body>
 </html>

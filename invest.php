@@ -103,10 +103,10 @@
                   <input type="hidden" id="customers_email" value="<?php echo $email ?>">
                   <div class="form-group">
                     <div class="btn-group btn-block" role="group" aria-label="Months">
-                      <button type="button" class="btn btn-primary mpicker">3 Months</button>
-                      <button type="button" class="btn btn-primary mpicker">6 Months</button>
-                      <button type="button" class="btn btn-primary mpicker">9 Months</button>
-                      <button type="button" class="btn btn-primary mpicker">12 Months</button>
+                      <button type="button" class="btn btn-success mpicker">3 Months</button>
+                      <button type="button" class="btn btn-success mpicker">6 Months</button>
+                      <button type="button" class="btn btn-success mpicker">9 Months</button>
+                      <button type="button" class="btn btn-success mpicker">12 Months</button>
                     </div>
                   </div>
                   <div class="form-group">
@@ -119,24 +119,38 @@
                       On payment you will receive an investment reciept
                     </label>
                   </div>
-                  <button type="button" class="btn btn-primary mr-2" onclick="payWithPaystack()">Pay with paystacks</button>
-                  <button type="button" class="btn btn-light mr-2" onclick="payWithBank()" data-toggle="modal" data-target="#withBank" data-id="1">Pay with Bank</button>
+                  <button type="button" class="btn btn-success mr-2" onclick="payWithPaystack()">Pay with paystacks</button>
+                  <button type="button" class="btn btn-light mr-2" onclick="payWithBank()" data-toggle="modal" data-target="#withBank" data-id="1">Pay with Bank Transfer</button>
+                  <div class="card p-3 mt-3 hide" id="transferCard">
+                    <blockquote class="blockquote mb-0">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th style="font-weight: 600;color:#25D04E;font-size: 18px;">Payment By Transfer</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="font-weight: 600;">Account Name</td>
+                            <td>Farmsby limited</td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight: 600;">Account Number</td>
+                            <td>1016672269</td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight: 600;">Bank Name</td>
+                            <td>Zenith Bank</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <footer>
+                        <button type="button" class="btn btn-success mr-2 submitPaywithTransfer">Click to Complete Investment</button>
+                      </footer>
+                    </blockquote>
+                  </div>
                 </form>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- User Update Modal Start -->
-      <div class="modal fade" tabindex="-1" role="dialog" id="withBank">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -165,7 +179,5 @@
   <!-- Paystacks API -->
   <script src="https://js.paystack.co/v1/inline.js"></script> 
   <script src="assets/js/app/pay.js"></script>
-  <!-- FlutterWave API -->
-  <script src="http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
 </body>
 </html>    

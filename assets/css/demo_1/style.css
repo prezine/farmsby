@@ -1,4 +1,4 @@
-@-moz-keyframes flash {
+a@-moz-keyframes flash {
   0% {
     opacity: 1; }
   25% {
@@ -25032,3 +25032,7 @@ div.tagsinput {
   float: right; }
 
 /*# sourceMappingURL=../maps/demo_1/style.css.map */
+
+.hide {
+    display: none;
+}

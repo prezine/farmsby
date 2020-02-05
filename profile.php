@@ -274,28 +274,28 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form action="./app/model/updateuser" method="post">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" value="" placeholder="Enter Name">
+                    <input type="text" class="form-control" name="name" value="<?php echo ($name) ? $name : NULL ?>" placeholder="Enter Name">
                   </div>
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" value="" placeholder="Enter Email">
+                    <input type="email" class="form-control" name="email" value="<?php echo ($email) ? $email : NULL ?>" placeholder="Enter Email">
                   </div>
                   <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="tel" class="form-control" id="phone" value="">
+                    <input type="tel" class="form-control" name="phone" value="<?php echo ($phone) ? $phone : NULL ?>">
                   </div>
                   <div class="form-group">
                     <label for="gender">Gender</label>
-                    <select class="form-control" id="gender">
-                      <option selected="" disabled="">Select your gender</option>
+                    <select class="form-control" name="gender">
+                      <option><?php echo ($gender) ? $gender : 'Select your gender' ?></option>
                       <option>Male</option>
                       <option>Female</option>
                     </select>
                   </div>
-                  <div class="form-group">
+                  <!--<div class="form-group">
                     <label>Upload profile photo</label>
                     <input type="file" name="img[]" class="file-upload-default">
                     <div class="input-group col-xs-12">
@@ -304,9 +304,9 @@
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
                     </div>
-                  </div>
+                  </div>-->
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-success">update profile</button>
+                  <button type="submit" class="btn btn-success">update profile</button>
                 </form>
             </div>
           </div>

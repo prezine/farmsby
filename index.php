@@ -114,7 +114,7 @@
                     <div class="row">
                       <div class="col-12 col-md-12 col-xl-12">
                         <h3 class="mb-2">&#x20A6;
-                          <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE status="0" AND userID='.$userID, 'SUM(amount)') ?>
+                          <?php echo $database->count('SELECT SUM(amount) FROM invest WHERE status="0" AND is_approved="1" AND userID='.$userID, 'SUM(amount)') ?>
                         </h3>
                       </div>
                     </div>
@@ -174,7 +174,7 @@
                                 $totalDiv[] =
                                 $algorithm->calcProfit($td['amount'], $td['dateInvested'], $trans->typeToPercent($td['farm_mode']));
                               }
-                              echo '&#x20a6; ' . array_sum($totalDiv);
+                              echo '&#x20a6; ' . number_format(array_sum(str_replace(',', '', $totalDiv)));
                             } else {
                               echo '&#x20a6; ' . 0;
                             }
