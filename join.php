@@ -58,15 +58,15 @@
                                         <form class="forms-sample" action="<?php echo BASEPATH . 'app/model/join'?>" method="post">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Fullname</label>
-                                            <input type="text" class="form-control" id="name" name="name" autocomplete="name" placeholder="Fullname">
+                                            <input type="text" class="form-control" id="name" name="name" autocomplete="on" placeholder="Fullname">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                            <input type="email" class="form-control" id="email" autocomplete="on" name="email" placeholder="Email" required="require">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" placeholder="Password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputSelect1"> How did you hear about us?</label>

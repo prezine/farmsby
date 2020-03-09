@@ -34,7 +34,7 @@
 		public function withdrawProfitOnly($investID = '', $withdrawalAmt = '')
 		{
 			$conn = $this->conn;
-			$updateTable = $this->update("UPDATE invest SET request_withdrawal='1', status='1', withdrawalAmt='$withdrawalAmt', dateRequestWithdrawals='GLOBAL_DATE' WHERE investID='$investID'");
+			$updateTable = $this->update("UPDATE invest SET request_withdrawal='1', status='1', withdrawalAmt='$withdrawalAmt', dateRequestWithdrawals='".GLOBAL_DATE."' WHERE investID='$investID'");
 			$grabTransactionData = $this->select("SELECT * FROM invest WHERE investID='$investID'", true);
 			$transactionDecode = json_decode($grabTransactionData, true);	
 			$invest = array(

@@ -48,12 +48,18 @@
             <div class="card">
               <div class="card-body">
                 <div class="container-fluid d-flex justify-content-between">
-                  <div class="col-lg-4 pl-0">
+                  <div class="col-lg-6 pl-0">
                     <a href="#" class="noble-ui-logo d-block mt-3">
                       <img src="<?php echo BASEPATH . 'assets/images/logo.png'?>" style="width: 150px">
                     </a>
                     <h4 class="font-weight-medium text-uppercase text-left mt-4 mb-2">investment receipt</h4>
                     <h6 class="text-left pb-2"># INV-<?php echo sprintf('%06d', $receiptDecode['investID']); ?></h6>
+                    <h5 class="font-weight-medium text-left mt-3">
+                      <?php echo $user->retreiveuserID($receiptDecode['userID'], 'name')["name"]; ?>
+                    </h5>
+                    <h6 class="font-weight-medium text-left mt-1">
+                      <?php echo $user->retreiveuserID($receiptDecode['userID'], 'email')["email"]; ?>
+                    </h6>
                   </div>
                 </div>
                 <div class="container-fluid mt-5 d-flex justify-content-center w-100">

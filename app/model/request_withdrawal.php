@@ -19,7 +19,7 @@
 		$investID = $_GET['investID'];
 		$withdrawalAmt = $_GET['profit'];
 		if ($withdrawalType == 1) {
-			if ($trasact->withdrawProfitOnly($investID) == 200) {
+			if ($trasact->withdrawProfitOnly($investID, $withdrawalAmt) == 200) {
 				$_SESSION['msg'] = 
 				(ENV == 0) ? $error->err('success', $res) : 
 				$error->err('success', 'Awesome! Your request for profit withdrwal have been placed');

@@ -24,6 +24,11 @@
 			$conn = $this->conn;
 			return $this->select("SELECT userID, name FROM users WHERE userToken ='$token'");
 		}
+		public function retreiveuserID($userID = '', $row = '')
+		{
+			$conn = $this->conn;
+			return $this->select("SELECT $row FROM users WHERE userID ='$userID'");
+		}
 		public function grabBankData()
 		{
 			$conn = $this->conn;
